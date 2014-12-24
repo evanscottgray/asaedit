@@ -1,0 +1,38 @@
+.container{style: "padding: 15px 15px 0px;"}
+  .row
+    .page-header
+      %h1
+        asaedit
+        %small
+          let's make some vpn users!
+  .row
+    .col-md-8.col-md-offset-2
+      .well
+        .span.text-center
+          %p
+            Beware, Entering a user that already exists will reset their password!
+        %form{id:"form", method: "POST", class: "form-inline"}
+          %input{class: "form-control", type: "text", placeholder: "first.last (then press enter!)", name:"user", id:"user"}
+        .row{style: 'padding-top: 10px;'}
+          .text-center
+            .btn.btn-danger.btn-small.list-users
+              List Users...
+      .alert.alert-success.alert-dismissible.password{style:"display: none;"}
+        %button.btn.btn-info.close{type: "button"} &times;
+        .text-center.response
+      .alert.alert-success.alert-dismissible.users{style: "display: none;"}
+        %button.btn.btn-info.close{type: "button"} &times;
+        .span.text-center
+          %p
+            Users on the firewall:
+          .well
+            %p#users{style: "word-wrap: break-word;"}
+      .alert.alert-danger.alert-dismissible{style:"display: none;"}
+        %button.btn.btn-info.close{type: "button"} &times;
+        .span.text-center#error
+      .alert.alert-info.text-center{style: "display: none;"}
+        .span{style: 'padding-bottom: 10px;'} Working...
+        %img{src: "/images/ajax-loader.gif", class: "img-responsive", style: "margin: 0 auto;"}
+%script{src: "/js/jquery.js"}
+%script{src: "/js/bootstrap.min.js"}
+%script{src: "/js/application/page.js"}

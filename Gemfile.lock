@@ -1,0 +1,55 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    builder (3.2.2)
+    cisco (0.0.1)
+      net-ssh
+    domain_name (0.5.19)
+      unf (>= 0.0.5, < 1.0.0)
+    excon (0.25.3)
+    fog (1.14.0)
+      builder
+      excon (~> 0.25.0)
+      formatador (~> 0.2.0)
+      mime-types
+      multi_json (~> 1.0)
+      net-scp (~> 1.1)
+      net-ssh (>= 2.1.3)
+      nokogiri (~> 1.5)
+      ruby-hmac
+    formatador (0.2.5)
+    haml (4.0.5)
+      tilt
+    mime-types (2.3)
+    multi_json (1.10.1)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.9.1)
+    netrc (0.7.7)
+    nokogiri (1.5.10)
+    rack (1.5.2)
+    rack-protection (1.5.3)
+      rack
+    rest-client (1.7.2)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
+    ruby-hmac (0.4.0)
+    sinatra (1.4.5)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
+    tilt (1.4.1)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.6)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  cisco
+  domain_name
+  fog
+  haml
+  rest-client
+  sinatra

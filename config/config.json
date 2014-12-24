@@ -1,0 +1,10 @@
+{
+  "asa_user": "test",
+  "asa_user_password": "test",
+  "asa_prompt": "FW1-TEST1#",
+  "asa_ip": "10.0.0.1",
+  "restricted_users": [
+    "user1",
+    "user2"
+  ]
+}

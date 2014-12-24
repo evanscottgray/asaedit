@@ -1,0 +1,19 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %title
+      = @title if defined?(@title)
+    %link{:href => "/css/bootstrap.css", :rel => "stylesheet"}/
+    %link{:href => "/css/stickyfooter.css", :rel => "stylesheet"}/
+  %body
+    #wrap
+      .navbar.navbar-default.navbar-static-top
+        .navbar-inner
+          .navbar-brand{:href => "/"}
+            ASAedit
+      =yield
+    #footer
+      .container
+        %p.text-muted.credit
+          ASAedit, lovingly crafted by
+          %a{:href => "mailto:evan+github@evanscottgray.com"} evan.
