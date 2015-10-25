@@ -1,5 +1,6 @@
 require 'cisco'
 require 'securerandom'
+require 'json'
 
 # Overrides yeah!
 # Cisco doesn't properly implement SSH on the ASA platfrom currently. Incredibly this is an issue across all ASA code versions.
@@ -41,10 +42,10 @@ module Net
 end
 
 def get_users
-  asa_user = CONFIG['asa_user']
-  asa_ip = CONFIG['asa_ip']
-  asa_user_password = CONFIG['asa_user_password']
-  asa_prompt = CONFIG['asa_prompt']
+  asa_user = ENV.fetch('ASA_USER', CONFIG['asa_user'])
+  asa_user_password = ENV.fetch('ASA_USER_PASSWORD', CONFIG['asa_user_password'])
+  asa_ip = ENV.fetch('ASA_IP', CONFIG['asa_ip'])
+  asa_prompt = ENV.fetch('ASA_PROMPT', CONFIG['asa_prompt'])
 
   asa = Cisco::Base.new(:host => asa_ip, :user => asa_user, :password => asa_user_password, :transport => :ssh)
   asa.clear_init
@@ -52,9 +53,7 @@ def get_users
   asa.cmd('terminal pager 0')
   asa.cmd('sh ru | i username')
   output = asa.run
-  #output.each do |line|
-  #  puts line
-  #end
+
   output
 end
 
@@ -64,7 +63,17 @@ def users
 end
 
 def is_valid?(username)
-  restricted = CONFIG['restricted_users']
+  # ideally set this like export RESTRICTED_USERS='["coolguy", "coolerguy"]' 
+  if ENV.fetch('RESTRICTED_USERS', nil)
+    begin
+      restricted = JSON.parse(ENV['RESTRICTED_USERS'])
+    rescue JSON::ParserError => e
+      raise ArgumentError, 'Restricted Username Environment Variable JSON Parse Failure. Got: |%s|' % ENV['RESTRICTED_USERS']
+    end
+  else
+    restricted = CONFIG['restricted_users']
+  end
+  
   restricted.each do |user|
     if username.to_s == user.to_s
       raise ArgumentError, 'Restricted Username'
